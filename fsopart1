@@ -1,0 +1,59 @@
+part0 
+  0.4 New Note
+
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note
+server-->browser: new_note
+
+note over browser:
+When button is clicked, browser posts user input to the server address new_note. Data is sent as body of POST- request. Server responds with URL redirect to location /exampleapp/notes.
+end note 
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
+server-->browser: notes
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+server-->browser: main.css
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
+server-->browser: main.js
+
+note over browser: 
+browser reloads the notes page and starts fetching the css, main.js and data.json 
+end note 
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+server-->browser: [{ content: "HTML is easy", date: "2019-05-23" }, ...] 
+
+note over browser: 
+notes are rendered to display
+end note
+
+  0.5 single page app 
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa
+server-->browser: spa
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+server-->browser: main.css
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+server-->browser: spa.js
+
+note over browser: 
+browser starts executing spa.js code
+fetches one HTML page from server
+end note 
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+server-->browser: [{ content: "HTML is easy", date: "2019-05-23" }, ...]
+
+note over browser: 
+browser executes notes to display
+end note 
+
+  0.6 new note
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+server-->browser: new_note_spa 
+
+note over browser:
+browser executes new note spa as post request in json format
+prevents default GET event from happening
+event handler creates new note and sends to server 
+end note 
+
